@@ -48,8 +48,7 @@ from blib2to3.pgen2 import driver, token
 from blib2to3.pgen2.grammar import Grammar
 from blib2to3.pgen2.parse import ParseError
 
-
-__version__ = "18.9b0"
+__version__ = "18.9b0-s"
 DEFAULT_LINE_LENGTH = 88
 DEFAULT_EXCLUDES = (
     r"/(\.eggs|\.git|\.hg|\.mypy_cache|\.nox|\.tox|\.venv|_build|buck-out|build|dist)/"
@@ -2613,8 +2612,8 @@ def normalize_string_quotes(leaf: Leaf) -> None:
         orig_quote = '"'
         new_quote = "'"
     else:
-        orig_quote = "'"
-        new_quote = '"'
+        orig_quote = '"'
+        new_quote = "'"
     first_quote_pos = leaf.value.find(orig_quote)
     if first_quote_pos == -1:
         return  # There's an internal error
@@ -2655,11 +2654,10 @@ def normalize_string_quotes(leaf: Leaf) -> None:
     if new_escape_count > orig_escape_count:
         return  # Do not introduce more escaping
 
-    if new_escape_count == orig_escape_count and orig_quote == '"':
-        return  # Prefer double quotes
+    if new_escape_count == orig_escape_count and orig_quote == "'":
+        return  # Prefer single quotes
 
     leaf.value = f"{prefix}{new_quote}{new_body}{new_quote}"
-
 
 def normalize_numeric_literal(leaf: Leaf) -> None:
     """Normalizes numeric (float, int, and complex) literals.
